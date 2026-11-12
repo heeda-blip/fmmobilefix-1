@@ -26,6 +26,7 @@ window.FM = {
   // Social pages: change here only
   facebook: 'https://www.facebook.com/fmmobilefix',
   instagram: 'https://www.instagram.com/fm_gadget89/',
+  tiktok: 'https://www.tiktok.com/@fm.mobile.fix',
 
   /* 2) GOOGLE ANALYTICS 4 + GOOGLE ADS conversion tracking.
         Leave empty until you have the IDs. Once filled in, every click on
@@ -86,8 +87,10 @@ window.FM = {
     scan:'<path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M4 12h16"/>',
     pulse:'<path d="M3 12h4l2-5 4 10 2-5h6"/>',
     nav:'<path d="M3 11 21 3l-8 18-2-8z"/>',
+    tt:'<path class="i-fill" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>',
     ig:'<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>',
     home:'<path d="M3 11 12 3l9 8"/><path d="M5 9.5V21h14V9.5"/>',
+    trackpad:'<rect x="4" y="5" width="16" height="14" rx="2.5"/><path d="M4 14.5h16M12 14.5V19"/>',
     fb:'<path class="i-fill" d="M13.6 21.9v-8.1h2.7l.4-3.2h-3.1V8.6c0-.9.3-1.5 1.6-1.5h1.7V4.3c-.3 0-1.3-.1-2.5-.1-2.4 0-4.1 1.5-4.1 4.2v2.3H7.6v3.2h2.7v8.1z"/>',
     star:'<path class="i-fill" d="M12 2.8l2.8 5.8 6.3.8-4.6 4.4 1.2 6.2L12 17l-5.7 3 1.2-6.2L2.9 9.4l6.3-.8z"/>',
     quote:'<path class="i-fill" d="M4 18v-5.5C4 8.6 6 6 9.6 5l.7 1.6C8.3 7.4 7.3 9 7.2 11H10v7zm9.5 0v-5.5c0-3.9 2-6.5 5.6-7.5l.7 1.6c-2 .8-3 2.4-3.1 4.4h2.8v7z"/>',
@@ -120,6 +123,11 @@ window.FM = {
   });
   document.querySelectorAll('[data-fb]').forEach(function (a) {
     a.href = FM.facebook;
+    a.target = '_blank';
+    a.rel = 'noopener';
+  });
+  document.querySelectorAll('[data-tt]').forEach(function (a) {
+    a.href = FM.tiktok;
     a.target = '_blank';
     a.rel = 'noopener';
   });
@@ -158,6 +166,7 @@ window.FM = {
     else if (/google\.[a-z.]+\/maps/.test(h)) track('directions_click', t);
     else if (h.indexOf('facebook.com') > -1) track('facebook_click', t);
     else if (h.indexOf('instagram.com') > -1) track('instagram_click', t);
+    else if (h.indexOf('tiktok.com') > -1) track('tiktok_click', t);
   }, true);
   document.querySelectorAll('[data-wa-service]').forEach(function (a) {
     a.href = FM.link(FM.serviceMessage(a.dataset.waService, LANG));
@@ -230,7 +239,7 @@ window.FM = {
     }
   });
   addEventListener('resize', function () {
-    if (openModal && openModal.classList.contains('modal-menu') && innerWidth > 1100) hideModal(true);
+    if (openModal && openModal.classList.contains('modal-menu') && innerWidth > 1180) hideModal(true);
   });
 
   /* ---------- FAQ accordion ---------- */
@@ -269,6 +278,8 @@ window.FM = {
     document.querySelectorAll('.js-badge').forEach(function (b) {
       b.classList.toggle('open', open);
       var sp = b.querySelector('span'); if (sp) sp.textContent = msg;
+      b.setAttribute('data-short', open ? (LANG === 'ms' ? 'Buka' : 'Open') : (LANG === 'ms' ? 'Tutup' : 'Closed'));
+      b.setAttribute('title', msg);
     });
     document.querySelectorAll('[data-row]').forEach(function (r) {
       r.classList.toggle('today', r.dataset.row === (t.fri ? 'fri' : 'norm'));
@@ -276,6 +287,15 @@ window.FM = {
   }
   updateHours();
   setInterval(updateHours, 60000);
+  // header status chip opens the Location & hours popup
+  document.querySelectorAll('.hdr .js-badge').forEach(function (b) {
+    if (!document.getElementById('m-loc')) return;
+    b.setAttribute('role', 'button');
+    b.setAttribute('tabindex', '0');
+    b.setAttribute('aria-label', 'Waktu operasi dan lokasi');
+    b.addEventListener('click', function () { showModal('m-loc', b); });
+    b.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showModal('m-loc', b); } });
+  });
 
   /* ---------- Card spotlight (follows the pointer) ---------- */
   if (matchMedia('(hover:hover)').matches) {
@@ -344,6 +364,63 @@ window.FM = {
       if (b.width && b.height) svg.setAttribute('viewBox', [b.x, b.y, b.width, b.height].map(function (n) { return +n.toFixed(2); }).join(' '));
     } catch (err) { /* keep default viewBox */ }
   });
+
+  /* ---------- Phone layout: carousels, compact grids, bottom bar ---------- */
+  var SMALL = matchMedia('(max-width: 760px)');
+  // 1) long lists become swipe carousels
+  var carSel = ['.revs', '.mini-revs', '.fbp-grid', '.tips-grid', '.why-list', '.info', '.areas', '.tl'];
+  var cars = [];
+  carSel.forEach(function (s) { document.querySelectorAll(s).forEach(function (el) { cars.push(el); }); });
+  document.querySelectorAll('.grid').forEach(function (g) {
+    if (g.closest('.x-car')) return;
+    var isSvc = g.querySelector(':scope > .svc');
+    var isWhy = g.classList.contains('g4') && g.closest('.sec-light') && !g.closest('.areas');
+    if (isSvc || isWhy) cars.push(g);
+    else if (g.classList.contains('g3') || g.classList.contains('g4')) g.classList.add('c2');
+  });
+  cars.forEach(function (el) {
+    var items = Array.prototype.filter.call(el.children, function (c) { return !c.classList.contains('tl-track') && !c.classList.contains('tl-fill'); });
+    if (items.length < 2) return;
+    el.classList.add('x-car');
+    if (el.classList.contains('info')) el.classList.add('narrow');
+    var dots = document.createElement('div');
+    dots.className = 'x-dots';
+    dots.setAttribute('aria-hidden', 'true');
+    for (var k = 0; k < items.length; k++) dots.appendChild(document.createElement('i'));
+    var hint = document.createElement('span'); hint.textContent = LANG === 'ms' ? 'Geser untuk lagi' : 'Swipe for more';
+    dots.appendChild(hint);
+    el.parentNode.insertBefore(dots, el.nextSibling);
+    function mark() {
+      var first = items[0]; if (!first) return;
+      var step = first.getBoundingClientRect().width + 14;
+      var idx = Math.round(el.scrollLeft / step);
+      var ds = dots.querySelectorAll('i');
+      for (var j = 0; j < ds.length; j++) ds[j].classList.toggle('on', j === idx);
+      if (el.scrollLeft > 20) hint.style.display = 'none';
+    }
+    el.addEventListener('scroll', mark, { passive: true });
+    mark();
+  });
+
+  // 2) sticky bottom bar on phones: Phone / Laptop / WhatsApp
+  var logo = document.querySelector('.hdr .logo');
+  if (logo) {
+    var home = logo.getAttribute('href') || './';
+    var pre = home === './' ? '' : home;
+    var waBtn = document.querySelector('.hdr a[href*="wa.me"]');
+    var path = location.pathname;
+    var bar = document.createElement('nav');
+    bar.className = 'mbar';
+    bar.setAttribute('aria-label', 'Pilihan pantas');
+    bar.innerHTML =
+      '<a href="' + pre + 'phone-repair/"' + (/\/phone-repair\//.test(path) ? ' class="on" aria-current="page"' : '') + '><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>Repair Phone</a>' +
+      '<a href="' + pre + 'laptop-repair/"' + (/\/laptop-repair\//.test(path) ? ' class="on" aria-current="page"' : '') + '><svg class="i" aria-hidden="true"><use href="#i-laptop"/></svg>Repair Laptop</a>' +
+      '<a class="wa" href="' + (waBtn ? waBtn.href : FM.link(FM.messages.general)) + '" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>';
+    document.body.appendChild(bar);
+    if (location.protocol === 'file:') {
+      bar.querySelectorAll('a[href$="/"]').forEach(function (a) { a.setAttribute('href', a.getAttribute('href') + 'index.html'); });
+    }
+  }
 
   /* ---------- Year in footer ---------- */
   document.querySelectorAll('.js-year').forEach(function (y) { y.textContent = new Date().getFullYear(); });

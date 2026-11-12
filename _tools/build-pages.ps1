@@ -411,7 +411,7 @@ $AREAS = @(
 function JsonLd($P, $path, $title, $desc, $crumbs, $svcName, $faq, $extra) {
   $url = $SITE + '/' + $path
   $g = New-Object System.Collections.Generic.List[string]
-  $g.Add('{"@type":"MobilePhoneStore","@id":"' + $SITE + '/#business","name":"FM MOBILE FIX","url":"' + $SITE + '/","image":"' + $SITE + '/assets/img/og-image.jpg","logo":"' + $SITE + '/assets/img/logo-full.png","telephone":"+601157558115","address":{"@type":"PostalAddress","streetAddress":"Lot 3745, Jalan Murai, Kampung Batu 9 Kebun Baru","addressLocality":"Telok Panglima Garang","addressRegion":"Selangor","postalCode":"42500","addressCountry":"MY"},"geo":{"@type":"GeoCoordinates","latitude":2.9291257,"longitude":101.4977695},"hasMap":"https://www.google.com/maps/place/?q=FM+Mobile+Fix+Telok+Panglima+Garang","areaServed":["Telok Panglima Garang","Kebun Baru","Rimbayu","Jalan Kebun","Shah Alam"],"sameAs":["https://www.facebook.com/fmmobilefix","https://www.instagram.com/fm_gadget89/"],"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday"],"opens":"10:00","closes":"21:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Friday","opens":"10:00","closes":"13:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Friday","opens":"15:00","closes":"21:00"}]}')
+  $g.Add('{"@type":"MobilePhoneStore","@id":"' + $SITE + '/#business","name":"FM MOBILE FIX","url":"' + $SITE + '/","image":"' + $SITE + '/assets/img/og-image.jpg","logo":"' + $SITE + '/assets/img/logo-full.png","telephone":"+601157558115","address":{"@type":"PostalAddress","streetAddress":"Lot 3745, Jalan Murai, Kampung Batu 9 Kebun Baru","addressLocality":"Telok Panglima Garang","addressRegion":"Selangor","postalCode":"42500","addressCountry":"MY"},"geo":{"@type":"GeoCoordinates","latitude":2.9291257,"longitude":101.4977695},"hasMap":"https://www.google.com/maps/place/?q=FM+Mobile+Fix+Telok+Panglima+Garang","areaServed":["Telok Panglima Garang","Kebun Baru","Rimbayu","Jalan Kebun","Shah Alam"],"sameAs":["https://www.facebook.com/fmmobilefix","https://www.instagram.com/fm_gadget89/","https://www.tiktok.com/@fm.mobile.fix"],"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday"],"opens":"10:00","closes":"21:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Friday","opens":"10:00","closes":"13:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Friday","opens":"15:00","closes":"21:00"}]}')
   $g.Add('{"@type":"WebPage","@id":"' + $url + '#webpage","url":"' + $url + '","name":"' + (JsonStr $title) + '","description":"' + (JsonStr $desc) + '","inLanguage":"ms-MY","isPartOf":{"@id":"' + $SITE + '/#website"}}')
   $items = @(); $pos = 1
   foreach ($c in $crumbs) { $items += '{"@type":"ListItem","position":' + $pos + ',"name":"' + (JsonStr $c[0]) + '","item":"' + $SITE + '/' + $c[1] + '"}'; $pos++ }
@@ -496,11 +496,12 @@ function Header($P, $sec) {
 <a class="skip" href="#main">Langkau ke kandungan</a>
 <header class="hdr">
  <div class="wrap">
-  <a href="$P" class="logo" aria-label="FM Mobile Fix, laman utama"><img src="${P}assets/img/logo-mark.png" alt="" width="53" height="38"><span>FM <b>MOBILE</b> FIX</span></a>
+  <a href="$P" class="logo" aria-label="FM Mobile Fix, laman utama"><img src="${P}assets/img/logo-mark.png" alt="" width="53" height="38"><span>FM <b>MOBILE FIX</b></span></a>
   $(NavHtml $P $sec)
   <div class="hdr-r">
    <span class="badge js-badge"><i></i><span>Semak waktu operasi&hellip;</span></span>
    <a class="icon-btn fb" data-fb href="https://www.facebook.com/fmmobilefix" aria-label="Facebook FM Mobile Fix">$(I 'fb')</a>
+   <a class="icon-btn tt" data-tt href="https://www.tiktok.com/@fm.mobile.fix" aria-label="TikTok FM Mobile Fix">$(I 'tt')</a>
    <a class="btn btn-primary btn-sm" data-wa="general" href="https://wa.me/601157558115" aria-label="WhatsApp FM Mobile Fix">$(I 'wa')<span class="lbl">WhatsApp</span></a>
    <button class="icon-btn burger" type="button" data-modal="m-menu" aria-controls="m-menu" aria-expanded="false" aria-label="Buka menu">$(I 'menu')</button>
   </div>
@@ -527,7 +528,7 @@ function FooterAndModals($P) {
    <div>
     <img src="${P}assets/img/logo-full.png" alt="FM MOBILE FIX Service &amp; repair" width="400" height="381" loading="lazy">
     <p>Kedai repair phone &amp; laptop di Telok Panglima Garang, Selangor.</p>
-    <div class="social"><a class="s-fb" data-fb href="https://www.facebook.com/fmmobilefix" aria-label="Facebook FM Mobile Fix">$(I 'fb')</a><a class="s-ig" data-ig href="https://www.instagram.com/fm_gadget89/" aria-label="Instagram FM Mobile Fix">$(I 'ig')</a><a class="s-wa" data-wa="general" href="https://wa.me/601157558115" aria-label="WhatsApp FM Mobile Fix">$(I 'wa')</a></div>
+    <div class="social"><a class="s-fb" data-fb href="https://www.facebook.com/fmmobilefix" aria-label="Facebook FM Mobile Fix">$(I 'fb')</a><a class="s-ig" data-ig href="https://www.instagram.com/fm_gadget89/" aria-label="Instagram FM Mobile Fix">$(I 'ig')</a><a class="s-tt" data-tt href="https://www.tiktok.com/@fm.mobile.fix" aria-label="TikTok FM Mobile Fix">$(I 'tt')</a><a class="s-wa" data-wa="general" href="https://wa.me/601157558115" aria-label="WhatsApp FM Mobile Fix">$(I 'wa')</a></div>
    </div>
    <div>
     <h4><a href="${P}phone-repair/">Repair Phone</a></h4>
@@ -539,7 +540,7 @@ function FooterAndModals($P) {
    </div>
    <div>
     <h4>Hubungi</h4>
-    <ul><li>$ADDR</li><li><a data-wa="general" href="https://wa.me/601157558115">WhatsApp: 011-5755 8115</a></li><li><a href="tel:+601157558115">Telefon: 011-5755 8115</a></li><li><a href="${P}kawasan/">Kawasan servis</a></li><li><a href="${P}tips/">Tips &amp; panduan</a></li></ul>
+    <ul><li>$ADDR</li><li><a data-wa="general" href="https://wa.me/601157558115">WhatsApp: 011-5755 8115</a></li><li><a href="tel:+601157558115">Telefon: 011-5755 8115</a></li><li><a data-tt href="https://www.tiktok.com/@fm.mobile.fix">TikTok: @fm.mobile.fix</a></li><li><a href="${P}kawasan/">Kawasan servis</a></li><li><a href="${P}tips/">Tips &amp; panduan</a></li></ul>
    </div>
   </div>
   <div class="ftr-bottom">&copy; <span class="js-year">2026</span> FM MOBILE FIX. Hak cipta terpelihara.</div>
@@ -561,6 +562,7 @@ function FooterAndModals($P) {
   <div class="menu-foot">
    <span class="badge js-badge"><i></i><span>Semak&hellip;</span></span>
    <a class="icon-btn fb" data-fb href="https://www.facebook.com/fmmobilefix" aria-label="Facebook FM Mobile Fix" style="margin-left:auto">$(I 'fb')</a>
+   <a class="icon-btn tt" data-tt href="https://www.tiktok.com/@fm.mobile.fix" aria-label="TikTok FM Mobile Fix">$(I 'tt')</a>
    <a class="btn btn-primary btn-sm" data-wa="general" href="https://wa.me/601157558115">$(I 'wa')WhatsApp</a>
   </div>
  </div>
@@ -874,6 +876,12 @@ foreach ($m in $MAIN) {
   $h = [regex]::Replace($h, '<script type="application/ld\+json">[\s\S]*?</script>', [Text.RegularExpressions.MatchEvaluator]{ param($x) $ld })
   $foot = FooterOnly $m.P
   $h = [regex]::Replace($h, '<footer class="ftr">[\s\S]*?</footer>', [Text.RegularExpressions.MatchEvaluator]{ param($x) $foot })
+  # logo text + TikTok next to Facebook (header and mobile menu)
+  $h = $h.Replace('<span>FM <b>MOBILE</b> FIX</span>', '<span>FM <b>MOBILE FIX</b></span>')
+  if ($h -notmatch 'class="icon-btn tt"') {
+    $ttIcon = '<a class="icon-btn tt" data-tt href="https://www.tiktok.com/@fm.mobile.fix" aria-label="TikTok FM Mobile Fix">' + (I 'tt') + '</a>'
+    $h = [regex]::Replace($h, '(<a class="icon-btn fb"[^>]*>(?:(?!</a>).)*</a>)', { param($x) $x.Groups[1].Value + "`n   " + $ttIcon })
+  }
   # header nav, mobile-menu Tips option, Tips popup
   $nav = NavHtml $m.P $m.sec
   $h = [regex]::Replace($h, '<nav class="nav" aria-label="Utama">[\s\S]*?</nav>', [Text.RegularExpressions.MatchEvaluator]{ param($x) $nav })

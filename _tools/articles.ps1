@@ -106,7 +106,7 @@ $homeFile = Join-Path $ROOT 'index.html'
 $hh = [IO.File]::ReadAllText($homeFile)
 $latest = ''; $n = 0
 foreach ($slug in $tipKeys) { if ($n -lt 3) { $latest += TipCard '' $slug $TIPS[$slug]; $n++ } }
-$block = '<!--tips--><section class="sec sec-2"><div class="wrap"><div class="sec-head center rv"><span class="eyebrow">Tips &amp; panduan</span><h2 class="h3d">Tips terkini</h2><p class="lead">Panduan ringkas untuk masalah phone dan laptop yang selalu jadi.</p></div><div class="tips-grid">' + $latest + '</div><p class="rv" style="text-align:center;margin-top:26px"><a class="btn btn-ghost" href="tips/">Lihat semua tips' + (I 'arrow') + '</a></p></div></section><!--/tips-->'
+$block = '<!--tips--><section class="sec sec-light"><div class="wrap"><div class="sec-head center rv"><span class="eyebrow">Tips &amp; panduan</span><h2 class="h3d">Tips terkini</h2><p class="lead">Panduan ringkas untuk masalah phone dan laptop yang selalu jadi.</p></div><div class="tips-grid">' + $latest + '</div><p class="rv" style="text-align:center;margin-top:26px"><a class="btn btn-ghost" href="tips/">Lihat semua tips' + (I 'arrow') + '</a></p></div></section><!--/tips-->'
 if ($hh -match '<!--tips-->') { $hh = [regex]::Replace($hh, '<!--tips-->[\s\S]*?<!--/tips-->', [Text.RegularExpressions.MatchEvaluator]{ param($x) $block }) }
 else { $hh = $hh.Replace(' <!-- HASIL KERJA', $block + "`n`n" + ' <!-- HASIL KERJA') }
 [IO.File]::WriteAllText($homeFile, $hh, $enc)

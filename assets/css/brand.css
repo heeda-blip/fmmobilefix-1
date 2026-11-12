@@ -533,6 +533,433 @@ h1,h2,h3,h4{font-family:var(--fh);line-height:1.12;letter-spacing:-.02em}
 .js .rv.in{opacity:1;transform:none}
 .js .rv.done{transition:transform .4s var(--ease),box-shadow .4s,opacity .3s}
 
+/* =========================================================
+   v2 UPDATE: logo, TikTok, brighter surfaces, phone-friendly layout
+   ========================================================= */
+
+/* ---------- Logo: FM white, MOBILE FIX orange ---------- */
+.logo b{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:#FF6B00;-webkit-text-fill-color:#FF6B00}
+
+/* ---------- TikTok ---------- */
+.icon-btn.tt{color:#fff;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.2)}
+.icon-btn.tt:hover{background:#111;border-color:#FE2C55;box-shadow:-2px -2px 0 #25F4EE inset}
+.social a.s-tt:hover{background:#111;border-color:#FE2C55;box-shadow:-2px -2px 0 #25F4EE inset}
+@media (max-width:640px){.hdr .icon-btn.tt{display:none}}
+@media (max-width:1180px){
+  .nav{display:none}
+  .hdr .burger{display:inline-grid}
+  .hdr-r{margin-left:auto}
+}
+
+/* ---------- Brighter, easier on the eyes (black background kept) ---------- */
+:root{--mut:#D0CDD8;--line:rgba(255,255,255,.14);--line2:rgba(255,255,255,.24);--bg2:#1E1E26}
+body{color:#F8F7FB}
+.lead{color:#DCD9E3}
+.card{background:
+    radial-gradient(420px circle at var(--mx,-200px) var(--my,-200px),rgba(255,107,0,.13),transparent 45%),
+    linear-gradient(160deg,rgba(54,52,64,.95),rgba(34,33,42,.97))}
+.card p,.tl-step p,.post p,.post li{color:#D6D3DE}
+.eyebrow{color:#FFC08F}
+.hours td:last-child{color:#4A4752}
+.dark-hours td:last-child{color:#D0CDD8}
+
+/* ---------- Phone & small tablet ---------- */
+.mbar{display:none}
+.x-dots{display:none}
+@media (max-width:760px){
+  html{font-size:106.25%}
+  .sec{padding:44px 0}
+  .sec-head{margin-bottom:22px}
+  .sec-head h2{font-size:1.75rem;margin:10px 0 10px}
+  .lead{font-size:1rem}
+  .card{padding:20px 18px}
+
+  /* swipe carousels (class added by site.js) */
+  .x-car{display:flex!important;grid-template-columns:none!important;columns:auto!important;gap:14px!important;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-left:-20px!important;margin-right:-20px!important;padding:6px 20px 12px!important;scroll-padding:0 20px}
+  .x-car::-webkit-scrollbar{display:none}
+  .x-car>*{flex:0 0 84%!important;max-width:84%;scroll-snap-align:start;margin:0!important;break-inside:auto}
+  .x-car.narrow>*{flex-basis:62%!important;max-width:62%}
+  .x-car .rv,.x-car.rv{opacity:1!important;transform:none!important}
+  .x-dots{display:flex;align-items:center;justify-content:center;gap:6px;margin:6px 0 2px}
+  .x-dots i{width:7px;height:7px;border-radius:99px;background:rgba(255,255,255,.28);transition:width .3s,background .3s}
+  .x-dots i.on{width:22px;background:var(--grad-btn)}
+  .x-dots span{margin-left:8px;font-size:.78rem;color:var(--mut)}
+  .sec-light .x-dots i{background:rgba(23,22,26,.2)}
+  .sec-light .x-dots i.on{background:var(--grad-btn)}
+  .sec-light .x-dots span{color:var(--ink2)}
+
+  /* compact 2-column grids */
+  .grid.c2{grid-template-columns:1fr 1fr!important;gap:10px}
+  .grid.c2 .card{padding:16px 14px}
+  .grid.c2 .card h3{font-size:.95rem}
+  .grid.c2 .card p{font-size:.84rem;line-height:1.5}
+  .grid.c2 .ic{width:42px;height:42px;font-size:1.2rem;border-radius:12px;margin-bottom:10px}
+  .related{grid-template-columns:1fr 1fr!important;gap:10px}
+  .related a{flex-direction:column;align-items:flex-start;gap:8px;padding:14px 12px;font-size:.86rem;line-height:1.3}
+  .related .ic{width:38px;height:38px;font-size:1.05rem}
+  .related .go{display:none}
+
+  /* home: device choice visible on the first screen */
+  .land{padding:22px 0 28px}
+  .land-head{margin-bottom:6px}
+  .land-head h1{font-size:2.15rem;margin:12px auto 10px}
+  .land-head .lead{font-size:.95rem}
+  .g-pill{margin-top:12px;font-size:.8rem}
+  .pick-hint{display:none}
+  .pick{grid-template-columns:1fr 1fr!important;gap:12px;margin-top:18px}
+  .pick-card{border-radius:22px}
+  .pick-card::before{opacity:1}
+  .pick-media,.pick-card p,.pick-card .tags,.pick-go>span:first-child{display:none}
+  .pick-body{margin:0;padding:20px 12px 16px;gap:10px;align-items:center;text-align:center}
+  .pick-tag{flex-direction:column;gap:12px}
+  .pick-tag .ic{width:66px;height:66px;font-size:2rem}
+  .pick-card h2{font-size:1.02rem;line-height:1.2}
+  .pick-go{border:0;padding-top:0;justify-content:center}
+  .pick-go .arr{width:40px;height:40px;font-size:1.05rem}
+  .info{margin-top:18px}
+  .info .card{padding:14px 16px}
+
+  /* shorter phone-page hero */
+  .scroller{height:150vh!important}
+
+  /* service / area pages */
+  .shero{padding:24px 0 36px}
+  .shero h1{font-size:1.95rem}
+  .shero-media{aspect-ratio:16/10}
+  .facts li{font-size:.8rem;padding:6px 11px}
+  .tl-step .card{padding:14px 16px}
+  .warranty{padding:16px}
+  .post-cover{aspect-ratio:16/10;margin-top:20px}
+
+  /* footer: compact */
+  .ftr{padding:34px 0 120px}
+  .ftr-grid.f4{grid-template-columns:1fr 1fr;gap:20px}
+  .ftr-grid.f4>div:first-child,.ftr-grid.f4>div:last-child{grid-column:1/-1}
+  .ftr-grid.f4>div:nth-child(2) ul,.ftr-grid.f4>div:nth-child(3) ul{display:none}
+  .ftr img{width:110px}
+
+  /* sticky bottom bar replaces the round WhatsApp button */
+  .fab{display:none}
+  .mbar{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:95;display:grid;grid-template-columns:1fr 1fr 1.15fr;gap:6px;padding:6px;border-radius:20px;
+    background:rgba(30,29,38,.9);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);border:1px solid rgba(255,255,255,.16);box-shadow:0 18px 40px -12px rgba(0,0,0,.85)}
+  .mbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:54px;border-radius:14px;font:700 .74rem var(--fh);color:#ECE9F2;text-align:center}
+  .mbar a .i{font-size:1.3rem}
+  .mbar a.on{color:#fff;background:linear-gradient(120deg,rgba(139,92,246,.35),rgba(243,18,96,.35),rgba(255,107,0,.35))}
+  .mbar a.wa{color:#fff;background:linear-gradient(135deg,#25D366,#128C7E);box-shadow:0 8px 20px -8px rgba(37,211,102,.7)}
+  .modal-sheet{padding-bottom:0}
+
+  /* tighter: first screen shows both device tiles */
+  .g-pill{display:none}
+  .land-head .lead{font-size:.92rem;line-height:1.55}
+  .pick{margin-top:14px}
+  .pick-body{padding:16px 10px 14px}
+  .pick-tag .ic{width:58px;height:58px;font-size:1.75rem}
+  .pick-go .arr{width:34px;height:34px}
+
+  /* steps become a swipe row too */
+  .x-car>.tl-track,.x-car>.tl-fill{display:none}
+  .tl.x-car .tl-step{display:block;text-align:left}
+  .tl.x-car .tl-dot{margin:0 0 12px;width:48px;height:48px;font-size:1.05rem;color:#fff;border-color:transparent;background:var(--grad-btn)}
+  .steps-side .lead,.steps-side .cta-row{display:none}
+
+  /* compact link tiles */
+  .related a{flex-direction:row;align-items:center;gap:10px;padding:10px 12px;font-size:.82rem}
+  .related .ic{width:32px;height:32px;font-size:.95rem;border-radius:10px;flex:none}
+
+  /* location, CTA, final */
+  .loc-main .ic,.grid.g2 .card>.ic:first-child{display:none}
+  .map iframe,.card iframe{height:190px!important}
+  .cta-art{display:none}
+  .cta-panel{padding:28px 20px}
+  .final{padding:34px 18px}
+  .ticks{margin:16px 0 4px}
+  .ticks li{font-size:.8rem;padding:6px 12px}
+  .switch{padding:18px}
+  .switch .ic{width:48px;height:48px;font-size:1.4rem}
+
+  /* footer: only the essentials on phones */
+  .ftr p,.ftr-grid.f4>div:last-child li:first-child,.ftr-grid.f4>div:last-child li:has(a[data-tt]){display:none}
+  .ftr-grid.f4>div:first-child{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .ftr img{width:80px;margin:0}
+  .social{margin-top:0}
+  .ftr-bottom{margin-top:22px}
+
+  .scroller{height:125vh!important}
+
+  /* home page overrides (beat the page's own inline styles) */
+  html body .land{padding:16px 0 26px}
+  html body .land-head{margin-bottom:4px}
+  html body .land-head h1{font-size:2.05rem;margin:10px auto 8px}
+  html body .pick-hint,html body .g-pill,html body .pick-media,html body .pick-card p,html body .pick-card .tags,html body .pick-go>span:first-child{display:none}
+  html body .pick{grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+  html body .pick-body{margin:0;padding:16px 10px 14px;gap:10px;align-items:center;text-align:center}
+  html body .pick-tag{flex-direction:column;gap:10px}
+  html body .pick-card h2{font-size:1rem}
+  html body .pick-go{border:0;padding-top:0;justify-content:center}
+
+  /* phone-page hero: keep scroll button + text above the bottom bar */
+  html body .hint{bottom:92px}
+  html body .heroText{bottom:162px}
+
+  /* compact Google rating card */
+  .rating{padding:18px 18px 16px;border-radius:20px}
+  .rating .score{font-size:3rem;margin:6px 0 2px}
+  .rating .stars{font-size:1.15rem}
+  .sec-light .rating p{margin:6px 0 10px;font-size:.85rem}
+  .rating .btn{min-height:42px;margin-top:4px}
+}
+
+/* =========================================================
+   v3 UPDATE: gradient background, phone header status, tighter phone view
+   ========================================================= */
+
+/* ---------- Gradient main background (black top → navy → purple → pink/orange) ---------- */
+html{background:#07070C}
+html body{background:transparent!important}
+body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(120% 55% at 50% 108%,rgba(255,107,61,.85) 0%,rgba(240,48,122,.75) 22%,rgba(160,50,220,.55) 45%,transparent 70%),
+    linear-gradient(180deg,#07070C 0%,#0A0A16 30%,#140E36 55%,#2B157A 75%,#5B23B8 90%,#8E2BC4 100%)}
+.bgfx{display:none}
+.sec-2{background:rgba(20,18,34,.55)}
+.shero,.lhero{background-color:transparent}
+.ftr{background:rgba(7,7,12,.82)}
+.hdr{background:rgba(9,9,15,.78)}
+.hdr.scrolled{background:rgba(9,9,15,.92)}
+
+/* ---------- Phone ---------- */
+@media (max-width:760px){
+  html{font-size:103.125%}
+  .sec{padding:38px 0}
+  .sec-head{margin-bottom:18px}
+  .sec-head h2{font-size:1.6rem}
+  .sec-head .lead{font-size:.95rem}
+  .post-head h1,.shero h1{font-size:1.8rem}
+
+  /* open/closed status moves into the header as a small tappable chip */
+  .hdr .badge{display:inline-flex!important;padding:5px 10px;gap:6px;font-size:.72rem;font-weight:700;color:#fff;cursor:pointer;max-width:none}
+  .hdr .badge>span{display:none}
+  .hdr .badge::after{content:attr(data-short)}
+  .hdr-r{gap:8px}
+  .info{display:none!important}
+  .info+.x-dots{display:none!important}
+
+  /* smaller Google review cards, text still readable */
+  .x-car.revs>*,.x-car.mini-revs>*{flex-basis:78%!important;max-width:78%}
+  .x-car .rev{padding:16px 16px 12px}
+  .x-car .rev .stars{font-size:.9rem;margin-bottom:6px}
+  .x-car .rev .q{font-size:1.4rem;top:12px;right:14px}
+  .x-car .rev p{font-size:.9rem;line-height:1.55;display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}
+  .x-car .rev-by{margin-top:10px;padding-top:10px}
+  .x-car .rev .av{width:34px;height:34px;font-size:.85rem}
+  .revs-wrap{gap:16px}
+
+  /* smaller swipe cards in general */
+  .x-car>*{flex-basis:80%!important;max-width:80%}
+  .fbp-t{font-size:.84rem;padding:0 14px 10px}
+  .fbp-h{padding:10px 14px 8px}
+  .tip-card .body{padding:14px 16px 16px;gap:6px}
+  .tip-card p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .faq-q{padding:16px 18px;font-size:.95rem}
+}
+@media (max-width:380px){.hdr .logo span{font-size:.86rem}.hdr .logo img{height:28px}}
+
+/* =========================================================
+   v4 UPDATE: smaller tiles, roomy phone header, hero fit, pick prompt
+   ========================================================= */
+.cue .tap{display:inline-block;font-size:1.2em;animation:tapBob 1.2s ease-in-out infinite}
+@keyframes tapBob{50%{transform:translateY(4px)}}
+@media (max-width:760px){
+  /* header: WhatsApp lives in the bottom bar, so drop it here → status chip has room */
+  .hdr .hdr-r>.btn[data-wa]{display:none}
+  .hdr .badge{padding:6px 12px}
+
+  /* service link tiles at about 3/4 size */
+  html body .related{gap:8px}
+  html body .related a{padding:8px 10px;gap:8px;font-size:.76rem;border-radius:12px;line-height:1.25}
+  html body .related .ic{width:26px;height:26px;font-size:.82rem;border-radius:8px}
+
+  /* "Servis repair phone kami" / "Masalah laptop yang kami baiki" cards at about 3/4 size */
+  html body .x-car>.svc{flex-basis:62%!important;max-width:62%;padding:14px 14px 12px}
+  html body .x-car>.svc .ic{width:38px;height:38px;font-size:1.1rem;border-radius:11px;margin-bottom:10px}
+  html body .x-car>.svc h3{font-size:.92rem;margin-bottom:4px}
+  html body .x-car>.svc p{font-size:.8rem;line-height:1.45;margin-bottom:10px}
+  html body .x-car>.svc ul{margin:8px 0 10px;gap:4px}
+  html body .x-car>.svc li{font-size:.68rem;padding:3px 8px}
+  html body .x-car>.svc .link-arrow,html body .x-car>.svc .more{font-size:.78rem}
+  html body .x-car>.svc .num{top:14px;right:14px;font-size:.7rem}
+
+  /* phone-page hero: text sits between header and the scroll button, never under the header */
+  html body .heroText{top:84px;bottom:150px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+  html body .heroText .hin{max-height:100%}
+  html body .heroText h1{font-size:1.65rem;margin-top:8px}
+  html body .heroText p{font-size:.86rem;margin-top:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  html body .heroText .eyebrow{display:none}
+  html body .hint{bottom:88px}
+
+  /* home: short line + eye-catching prompt above the two tiles */
+  html body .pick-hint{display:flex;margin:12px 0 0}
+  html body .pick-hint .cue{font-size:.9rem;padding:8px 8px 8px 14px;gap:10px}
+  html body .pick-hint .cue .chev{width:32px;height:32px;font-size:1rem}
+  html body .pick{margin-top:12px}
+}
+/* laptop hero on phones: no parallax drift, image sits below the buttons, chips stay on the image */
+@media (max-width:760px){
+  html body .lhero .stage{transform:none!important;margin-top:22px;width:100%;max-width:100%}
+  html body .lhero .stage-in{animation:stageInM .9s .2s var(--ease) both}
+  html body .lhero .shot{width:100%;margin-left:0}
+  html body .lhero .circuits{inset:0;width:100%;height:100%}
+  html body .lhero .tilt{transform:none!important}
+  html body .lhero .chip{max-width:58%;white-space:normal}
+  html body .lhero .c1{top:6%;left:3%}
+  html body .lhero .c3{bottom:6%;left:auto;right:3%}
+  html body .lhero .c2,html body .lhero .c4{display:none}
+  html body .lhero .wrap{gap:0}
+}
+@keyframes stageInM{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+/* never allow sideways page scroll; on phones, side slide-ins become slide-ups */
+html,body{overflow-x:clip}
+@media (max-width:760px){
+  .js .rv.from-l:not(.in),.js .rv.from-r:not(.in){transform:translateY(24px)}
+}
+
+/* v5: centered "why" cards, phone hero = one clean screen */
+@media (max-width:760px){
+  html body .why-list .card{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;padding:22px 16px}
+  html body .why-list .card .ic{margin:0}
+  html body .why-list .card h3{font-size:1rem;margin-bottom:4px}
+  html body .why-list .card p{font-size:.86rem}
+  html body .why-side{text-align:center}
+  html body .why-side .h3d{margin-left:auto;margin-right:auto}
+
+  /* phone-page hero: zoom animation kept; text, buttons and scroll button stay put the whole time */
+  html body .scroller{height:170vh!important;height:170svh!important}
+  html body .sticky{height:100vh;height:100svh}
+  html body .heroText{overflow:visible;bottom:166px}
+  html body .heroText p{display:block;-webkit-line-clamp:unset;overflow:visible}
+  html body .hint{visibility:visible!important;opacity:1!important}
+}
+@media (max-width:760px) and (max-height:640px){
+  html body .heroText h1{font-size:1.45rem}
+  html body .heroText p{font-size:.8rem;line-height:1.45}
+}
+
+/* ---------- Location label that opens Google Maps ---------- */
+.eyebrow-link{cursor:pointer;gap:7px;transition:background .25s,border-color .25s,transform .25s var(--ease),box-shadow .25s}
+.eyebrow-link::before{display:none}
+.eyebrow-link .i{font-size:1.1em;color:#FF8A3D;flex:none}
+.eyebrow-link .go{font-size:1em;opacity:.8;transition:transform .25s var(--ease)}
+.eyebrow-link:hover,.eyebrow-link:focus-visible{background:rgba(255,107,0,.2);border-color:rgba(255,140,60,.7);transform:translateY(-1px);box-shadow:0 8px 20px -10px rgba(255,107,0,.8)}
+.eyebrow-link:hover .go{transform:translateX(3px)}
+.heroText .eyebrow-link{pointer-events:auto}
+
+/* ---------- Headings: outlined, deeper 3D, orange → red → pink → purple ---------- */
+:root{--grad-h:linear-gradient(90deg,#FF7A00 0%,#FF3D2E 34%,#F31260 66%,#A855F7 100%)}
+.h3d{background-image:var(--grad-h);background-size:115% 100%}
+.h3d[data-text]::after{background-image:var(--grad-h);background-size:115% 100%;-webkit-text-stroke:0}
+/* outline drawn on the base text layer, BEHIND the gradient face → only the outer edge shows */
+.h3d[data-text]{-webkit-text-stroke:3.2px rgba(255,255,255,.95);color:transparent;-webkit-text-fill-color:transparent}
+.h3d::before{
+  -webkit-text-stroke:1.6px #8E1D10;color:#5A1208;-webkit-text-fill-color:#5A1208;
+  text-shadow:
+    .012em .014em 0 #C2380A,
+    .024em .028em 0 #A92A12,
+    .036em .042em 0 #8E1F1E,
+    .048em .056em 0 #741A2E,
+    .060em .070em 0 #5E1640,
+    .072em .084em 0 #4A1250,
+    .09em .14em .22em rgba(0,0,0,.6),
+    0 0 .6em rgba(243,18,96,.35)}
+.sec-light .h3d[data-text],.on-light .h3d[data-text]{-webkit-text-stroke:3.2px rgba(58,14,30,.9)}
+.sec-light .h3d::before,.on-light .h3d::before{
+  -webkit-text-stroke:1.6px #C96A3A;color:#E9824A;-webkit-text-fill-color:#E9824A;
+  text-shadow:.012em .014em 0 #F09A63,.024em .028em 0 #E07A45,.036em .042em 0 #CB6236,.048em .056em 0 #B4502C,.060em .070em 0 #9C4226,.072em .084em 0 #84371F,.09em .14em .2em rgba(120,45,10,.25)}
+@media (max-width:760px){
+  .h3d[data-text]{-webkit-text-stroke-width:2.4px}
+  .h3d::before{-webkit-text-stroke-width:1.2px}
+}
+
+/* ---------- Phone: device tiles with faded photo backgrounds ---------- */
+@media (max-width:760px){
+  html body .pick-card{position:relative;overflow:hidden}
+  html body .pick-media{display:block!important;position:absolute!important;inset:0;aspect-ratio:auto!important;z-index:0;background:#0d0d10}
+  html body .pick-media>img{width:100%;height:100%;object-fit:cover;object-position:52% 40%;transform-origin:55% 40%;animation:kenBurns 9s ease-in-out infinite alternate}
+  html body .desk{left:50%!important;right:auto!important;top:0!important;height:100%;width:auto;aspect-ratio:1800/1192;transform:translateX(-46%);animation:kenBurnsDesk 9s ease-in-out infinite alternate}
+  html body .pick-card:hover .desk{transform:translateX(-46%)}
+  html body .pick-media::after{background:linear-gradient(180deg,rgba(18,17,24,.05) 0%,rgba(18,17,24,.35) 32%,rgba(18,17,24,.88) 58%,#17161D 74%)!important}
+  html body .pick-media::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.16) 50%,transparent 65%);transform:translateX(-120%);animation:tileShine 6s ease-in-out infinite}
+  html body .pick-card:nth-child(2) .pick-media::before{animation-delay:3s}
+  html body .pick-body{position:relative;z-index:2;padding:78px 10px 14px!important}
+  html body .pick-tag .ic{width:46px;height:46px;font-size:1.35rem;border-radius:14px;box-shadow:0 10px 22px -8px rgba(0,0,0,.8)}
+  html body .pick-card h2{font-size:1.02rem;text-shadow:0 2px 10px rgba(0,0,0,.85),0 0 2px rgba(0,0,0,.9)}
+  html body .pick-go .arr{width:34px;height:34px}
+}
+@keyframes kenBurns{from{transform:scale(1)}to{transform:scale(1.12)}}
+@keyframes kenBurnsDesk{from{transform:translateX(-46%) scale(1)}to{transform:translateX(-46%) scale(1.1)}}
+@keyframes tileShine{0%,70%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+
+/* ---------- Laptop hero: hotspots + rotating info card ---------- */
+.hotspots{position:absolute;inset:0;z-index:2;pointer-events:none}
+.hotspots i{position:absolute;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:#fff;
+  box-shadow:0 0 0 3px rgba(255,107,0,.85),0 0 14px 4px rgba(255,90,0,.55);opacity:.45;transform:scale(.7);transition:opacity .4s,transform .45s var(--ease)}
+.hotspots i::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:2px solid rgba(255,150,70,.95);opacity:0}
+.hotspots i.on{opacity:1;transform:scale(1.15)}
+.hotspots i.on::after{animation:hsPing 1.5s ease-out infinite}
+@keyframes hsPing{0%{transform:scale(.5);opacity:.95}100%{transform:scale(2.3);opacity:0}}
+.hero-info{display:none}
+@media (max-width:760px){
+  .hero-info{position:relative;display:flex;align-items:center;gap:12px;width:100%;max-width:360px;min-height:68px;margin:4px auto 0;padding:10px 14px 12px 10px;overflow:hidden;border-radius:18px;
+    background:rgba(34,32,44,.78);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14);box-shadow:0 18px 36px -18px rgba(0,0,0,.9);color:#fff}
+  .hero-info .ic{flex:none;width:44px;height:44px;margin:0;border-radius:13px;font-size:1.25rem}
+  .hero-info .txt{flex:1;min-width:0}
+  .hero-info b{display:block;font:700 .98rem var(--fh);line-height:1.25}
+  .hero-info small{display:block;color:var(--mut);font-size:.8rem;line-height:1.35}
+  .hero-info .count{flex:none;font:700 .72rem var(--fh);color:var(--mut)}
+  .hero-info .bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--grad);transform-origin:left;transform:scaleX(0)}
+  .hero-info.run .bar{animation:hiBar var(--dur,2.8s) linear forwards}
+  .hero-info.swap .ic,.hero-info.swap .txt{animation:hiIn .45s var(--ease) both}
+  .hero-info.swap .txt{animation-delay:.06s}
+  /* tidier phone hero: the old floating chips give way to hotspots + card */
+  html body .lhero .chip{display:none!important}
+  html body .lhero .floaty{animation:floatyM 6s ease-in-out infinite}
+}
+@keyframes hiIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes hiBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes floatyM{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-10px) rotate(-1.2deg)}}
+.hotspots.all i.on::after{animation:none}
+.hotspots.all i.on{transform:scale(.95)}
+@media (max-width:760px){
+  .hotspots i{width:9px;height:9px;margin:-4.5px 0 0 -4.5px;box-shadow:0 0 0 2px rgba(255,107,0,.85),0 0 10px 3px rgba(255,90,0,.5)}
+  .hotspots i::after{inset:-6px;border-width:1.5px}
+  @keyframes hsPingM{0%{transform:scale(.5);opacity:.95}100%{transform:scale(1.9);opacity:0}}
+  .hotspots i.on::after{animation-name:hsPingM}
+}
+@media (prefers-reduced-motion:reduce){.hotspots i.on::after{animation:none}}
+
+/* big buttons never stick out of their box on phones */
+@media (max-width:760px){
+  html body .cta-row .btn-lg,html body .final .btn,html body .cta-panel .btn,html body .post-cta .btn{width:100%;max-width:100%;white-space:normal;text-align:center;line-height:1.25;min-height:52px;padding:13px 18px;font-size:.95rem}
+  html body .final .cta-row,html body .cta-panel .cta-row,html body .post-cta .cta-row{flex-direction:column;gap:10px}
+  html body .final{padding:30px 16px}
+  html body .ticks{gap:8px}
+  html body .ticks li{font-size:.78rem;padding:6px 12px}
+  html body .btn{max-width:100%}
+  html body .cta-row .btn{white-space:normal;text-align:center;line-height:1.25}
+  html body .why-side .btn{width:100%}
+}
+@media (max-width:760px) and (max-height:640px){
+  html body .heroText p{-webkit-line-clamp:2}
+  html body .heroText .cta-row{margin-top:10px}
+  html body .land{padding-top:10px}
+  html body .land-head .eyebrow{display:none}
+  html body .land-head h1{font-size:1.8rem;margin:4px auto 6px}
+  html body .pick-hint{margin-top:8px}
+  html body .pick{margin-top:8px}
+  html body .pick-body{padding:12px 10px 10px;gap:8px}
+  html body .pick-tag .ic{width:48px;height:48px;font-size:1.45rem}
+  html body .pick-go .arr{width:30px;height:30px}
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
