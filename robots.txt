@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /_tools/
+
+Sitemap: https://www.fmmobilefix.com.my/sitemap.xml
