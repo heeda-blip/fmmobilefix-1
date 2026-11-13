@@ -1223,3 +1223,19 @@ html body .heroText h1.h3d{font-size:clamp(2rem,3.6vw,3.3rem)!important}
   html body .heroText h1.h3d{font-size:clamp(2.8rem,min(5.6vw,10vh),5rem)!important}
 }
 @media (min-width:901px) and (max-height:640px){html body .heroText h1.h3d{font-size:clamp(2.3rem,8vh,3.2rem)!important}}
+
+/* h1: letter holes stay black (thick back stroke fills the counters, so the white 3D can't show through) */
+html body h1.h3d::before{-webkit-text-stroke-width:.2em!important}
+html body h1.h3d::before{text-shadow:.03em .04em 0 #F2F2F2,.045em .06em 0 #DADADA,.06em .08em 0 #C2C2C2,0 0 10px rgba(255,255,255,.28),0 0 22px rgba(255,255,255,.14)!important}
+html body h1.h3d::before{text-shadow:.07em .09em 0 #F4F4F4,.085em .11em 0 #E0E0E0,.1em .13em 0 #C8C8C8,.115em .15em 0 #B0B0B0,0 0 12px rgba(255,255,255,.25),0 0 24px rgba(255,255,255,.12)!important}
+
+/* h1 final: holes fully black (thick back layer), white 3D back to its original small depth */
+html body h1.h3d::before{-webkit-text-stroke-width:.26em!important;
+  text-shadow:.02em .025em 0 #F2F2F2,.035em .045em 0 #DADADA,.05em .065em 0 #C2C2C2,0 0 14px rgba(255,255,255,.22)!important}
+/* white 3D made with drop-shadow (respects the filled black holes); same small depth as before */
+html body h1.h3d::before{-webkit-text-stroke-width:.2em!important;text-shadow:none!important;
+  filter:drop-shadow(.018em .022em 0 #F2F2F2) drop-shadow(.016em .02em 0 #D8D8D8) drop-shadow(.016em .02em 0 #BEBEBE) drop-shadow(0 0 10px rgba(255,255,255,.22))}
+/* close the tiny gaps inside letter holes with black (dilate), then the small white 3D */
+html body h1.h3d::before{-webkit-text-stroke-width:.15em!important;
+  filter:drop-shadow(.035em 0 0 #000) drop-shadow(-.035em 0 0 #000) drop-shadow(0 .035em 0 #000) drop-shadow(0 -.035em 0 #000)
+         drop-shadow(.018em .022em 0 #F2F2F2) drop-shadow(.016em .02em 0 #D8D8D8) drop-shadow(.016em .02em 0 #BEBEBE) drop-shadow(0 0 10px rgba(255,255,255,.22))!important}
