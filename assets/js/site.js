@@ -176,6 +176,15 @@ window.FM = {
 
   /* ---------- 3D headline: copy text into data-text for the extrusion layer ---------- */
   document.querySelectorAll('.h3d').forEach(function (h) { h.setAttribute('data-text', h.textContent.trim()); });
+  // titles use Barlow Condensed: once it has loaded, repaint each title so no layer keeps the old font
+  if (document.fonts && document.fonts.load) {
+    document.fonts.load('italic 800 1em "Barlow Condensed"').then(function () {
+      document.querySelectorAll('h1.h3d').forEach(function (h) {
+        var t = h.getAttribute('data-text'); h.removeAttribute('data-text'); void h.offsetWidth; h.setAttribute('data-text', t);
+        h.style.display = 'none'; void h.offsetWidth; h.style.display = '';
+      });
+    }).catch(function () {});
+  }
 
   /* ---------- Header shadow on scroll ---------- */
   var hdr = document.querySelector('.hdr');
@@ -254,35 +263,35 @@ window.FM = {
 
   /* ---------- Opening hours badge (Malaysia time) ---------- */
   var T = LANG === 'ms'
-    ? { openUntil: 'Buka sekarang · tutup ', closedReopen: 'Tutup · buka semula ', closedTomorrow: 'Tutup · buka esok ', am: 'pagi', pm: 'petang', eve: 'malam' }
+    ? { openUntil: 'Kedai buka · tutup ', closedReopen: 'Kedai tutup · buka semula ', closedTomorrow: 'Kedai tutup · buka esok ', am: 'pagi', pm: 'petang', eve: 'malam' }
     : { openUntil: 'Open now · closes ', closedReopen: 'Closed · opens ', closedTomorrow: 'Closed · opens tomorrow ', am: 'am', pm: 'pm', eve: 'pm' };
   function klNow() {
     var p = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kuala_Lumpur', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date()), o = {};
     p.forEach(function (x) { o[x.type] = x.value; });
-    return { fri: o.weekday === 'Fri', m: (+o.hour % 24) * 60 + +o.minute };
+    return { fri: o.weekday === 'Fri', sun: o.weekday === 'Sun', sat: o.weekday === 'Sat', m: (+o.hour % 24) * 60 + +o.minute };
   }
   function fmt(m) {
     var h = Math.floor(m / 60);
-    var ap = LANG === 'ms' ? (h >= 18 ? T.eve : h >= 12 ? T.pm : T.am) : (h >= 12 ? T.pm : T.am);
+    var ap = LANG === 'ms' ? (h >= 18 ? T.eve : h >= 13 ? T.pm : h === 12 ? 'tengah hari' : T.am) : (h >= 12 ? T.pm : T.am);
     h = h % 12 || 12;
     return h + ':00 ' + ap;
   }
   function updateHours() {
-    var t = klNow(), s = t.fri ? [[600, 780], [900, 1260]] : [[600, 1260]], open = false, msg = '';
+    var t = klNow(), s = t.fri ? [[600, 780], [900, 1260]] : t.sun ? [[720, 1260]] : [[600, 1260]], open = false, msg = '';
     for (var i = 0; i < s.length; i++) if (t.m >= s[i][0] && t.m < s[i][1]) { open = true; msg = T.openUntil + fmt(s[i][1]); }
     if (!open) {
       var nx = null;
       for (var j = 0; j < s.length; j++) if (t.m < s[j][0]) { nx = s[j][0]; break; }
-      msg = nx !== null ? T.closedReopen + fmt(nx) : T.closedTomorrow + fmt(600);
+      msg = nx !== null ? T.closedReopen + fmt(nx) : T.closedTomorrow + fmt(t.sat ? 720 : 600);
     }
     document.querySelectorAll('.js-badge').forEach(function (b) {
       b.classList.toggle('open', open);
       var sp = b.querySelector('span'); if (sp) sp.textContent = msg;
-      b.setAttribute('data-short', open ? (LANG === 'ms' ? 'Buka' : 'Open') : (LANG === 'ms' ? 'Tutup' : 'Closed'));
+      b.setAttribute('data-short', open ? (LANG === 'ms' ? 'Kedai Buka' : 'Open') : (LANG === 'ms' ? 'Kedai Tutup' : 'Closed'));
       b.setAttribute('title', msg);
     });
     document.querySelectorAll('[data-row]').forEach(function (r) {
-      r.classList.toggle('today', r.dataset.row === (t.fri ? 'fri' : 'norm'));
+      r.classList.toggle('today', r.dataset.row === (t.fri ? 'fri' : t.sun ? 'sun' : 'norm'));
     });
   }
   updateHours();
@@ -341,6 +350,20 @@ window.FM = {
         var at = steps.length > 1 ? i / (steps.length - 1) : 0;
         s.classList.toggle('on', p >= at - 0.02);
       });
+      // vertical layouts: line runs from the first number to the LAST number only
+      var dots = tl.querySelectorAll('.tl-dot');
+      if (dots.length > 1) {
+        var c = [], top = r.top;
+        dots.forEach(function (d) { var b = d.getBoundingClientRect(); c.push(b.top + b.height / 2 - top); });
+        var len = c[c.length - 1] - c[0];
+        if (len > 4) {
+          var pos = p * (c.length - 1), k = Math.min(c.length - 2, Math.floor(pos)), fr = pos - k;
+          tl.style.setProperty('--y0', c[0].toFixed(1) + 'px');
+          tl.style.setProperty('--len', len.toFixed(1) + 'px');
+          tl.style.setProperty('--fy', (c[k] + (c[k + 1] - c[k]) * fr - c[0]).toFixed(1) + 'px');
+          tl.classList.add('tl-measured');
+        } else tl.classList.remove('tl-measured');
+      }
     });
     if (!RM) parallax.forEach(function (el) {
       var host = el.closest('section') || el.parentElement;
@@ -367,16 +390,11 @@ window.FM = {
 
   /* ---------- Phone layout: carousels, compact grids, bottom bar ---------- */
   var SMALL = matchMedia('(max-width: 760px)');
-  // 1) long lists become swipe carousels
-  var carSel = ['.revs', '.mini-revs', '.fbp-grid', '.tips-grid', '.why-list', '.info', '.areas', '.tl'];
+  // 1) No swipe carousels any more: everything stacks vertically.
+  //    Card grids get the "stack" class → compact one-column cards on phones (see CSS).
   var cars = [];
-  carSel.forEach(function (s) { document.querySelectorAll(s).forEach(function (el) { cars.push(el); }); });
   document.querySelectorAll('.grid').forEach(function (g) {
-    if (g.closest('.x-car')) return;
-    var isSvc = g.querySelector(':scope > .svc');
-    var isWhy = g.classList.contains('g4') && g.closest('.sec-light') && !g.closest('.areas');
-    if (isSvc || isWhy) cars.push(g);
-    else if (g.classList.contains('g3') || g.classList.contains('g4')) g.classList.add('c2');
+    if (g.classList.contains('g3') || g.classList.contains('g4')) g.classList.add('stack');
   });
   cars.forEach(function (el) {
     var items = Array.prototype.filter.call(el.children, function (c) { return !c.classList.contains('tl-track') && !c.classList.contains('tl-fill'); });
