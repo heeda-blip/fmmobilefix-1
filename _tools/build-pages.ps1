@@ -13,7 +13,7 @@ $TODAY = (Get-Date).ToString('yyyy-MM-dd')
 $ADDR = 'Lot 3745, Jalan Murai, Kampung Batu 9 Kebun Baru, 42500 Telok Panglima Garang, Selangor'
 $MAPDIR = 'https://www.google.com/maps?gl=my&amp;daddr=Lot+3745,+Jalan+Murai,+Kampung+Batu+9+Kebun+Baru,+42500+Telok+Panglima+Garang,+Selangor'
 $MAPEMBED = 'https://maps.google.com/maps?q=Lot+3745,+Jalan+Murai,+Kampung+Batu+9+Kebun+Baru,+42500+Telok+Panglima+Garang,+Selangor&amp;z=16&amp;output=embed'
-$GREVIEWS = 'https://www.google.com/maps/place/FM+Mobile+Fix/@2.9291257,101.4977695,17z/data=!4m6!3m5!1s0x31cdb1d3a1fb4489:0xc1f109f0a753a64f!8m2!3d2.9291257!4d101.4977695'
+$GREVIEWS = 'https://www.google.com/maps/search/?api=1&amp;query=FM+Mobile+Fix+Telok+Panglima+Garang'
 
 function I($name) { return '<svg class="i" aria-hidden="true"><use href="#i-' + $name + '"/></svg>' }
 function Esc($s) { return ($s -replace '"', '&quot;') }
@@ -496,7 +496,7 @@ function Header($P, $sec) {
 <a class="skip" href="#main">Langkau ke kandungan</a>
 <header class="hdr">
  <div class="wrap">
-  <a href="$P" class="logo" aria-label="FM Mobile Fix, laman utama"><img src="${P}assets/img/logo-mark.png" alt="" width="53" height="38"><span>FM <b>MOBILE FIX</b></span></a>
+  <a href="$P" class="logo" aria-label="FM Mobile Fix, laman utama"><img src="${P}assets/img/logo-mark.png" alt="" width="53" height="38"><span><b>FM MOB<i>i</i>LE</b> F<i>i</i>X</span></a>
   $(NavHtml $P $sec)
   <div class="hdr-r">
    <span class="badge js-badge"><i></i><span>Semak waktu operasi&hellip;</span></span>
@@ -877,7 +877,7 @@ foreach ($m in $MAIN) {
   $foot = FooterOnly $m.P
   $h = [regex]::Replace($h, '<footer class="ftr">[\s\S]*?</footer>', [Text.RegularExpressions.MatchEvaluator]{ param($x) $foot })
   # logo text + TikTok next to Facebook (header and mobile menu)
-  $h = $h.Replace('<span>FM <b>MOBILE</b> FIX</span>', '<span>FM <b>MOBILE FIX</b></span>')
+  $h = $h.Replace('<span>FM <b>MOBILE</b> FIX</span>', '<span><b>FM MOB<i>i</i>LE</b> F<i>i</i>X</span>')
   if ($h -notmatch 'class="icon-btn tt"') {
     $ttIcon = '<a class="icon-btn tt" data-tt href="https://www.tiktok.com/@fm.mobile.fix" aria-label="TikTok FM Mobile Fix">' + (I 'tt') + '</a>'
     $h = [regex]::Replace($h, '(<a class="icon-btn fb"[^>]*>(?:(?!</a>).)*</a>)', { param($x) $x.Groups[1].Value + "`n   " + $ttIcon })

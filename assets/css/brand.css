@@ -1239,3 +1239,8 @@ html body h1.h3d::before{-webkit-text-stroke-width:.2em!important;text-shadow:no
 html body h1.h3d::before{-webkit-text-stroke-width:.15em!important;
   filter:drop-shadow(.035em 0 0 #000) drop-shadow(-.035em 0 0 #000) drop-shadow(0 .035em 0 #000) drop-shadow(0 -.035em 0 #000)
          drop-shadow(.018em .022em 0 #F2F2F2) drop-shadow(.016em .02em 0 #D8D8D8) drop-shadow(.016em .02em 0 #BEBEBE) drop-shadow(0 0 10px rgba(255,255,255,.22))!important}
+
+/* header logo: "FM MOBiLE" orange, "FiX" white, both small i's white and lowercase */
+.logo span{color:#fff}
+.logo b{color:#FF6B00!important;-webkit-text-fill-color:#FF6B00!important}
+.logo i{font-style:normal;text-transform:none;color:#fff!important;-webkit-text-fill-color:#fff!important}
