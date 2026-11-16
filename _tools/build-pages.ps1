@@ -5,7 +5,7 @@
 #  Change $SITE when the real domain is ready, then run again.
 #  (This _tools folder is not part of the website. Do not upload it.)
 # =====================================================================
-param([string]$SITE = 'https://www.fmmobilefix.com.my')
+param([string]$SITE = 'https://fmmobilefix.com')
 
 $ROOT = Split-Path -Parent $PSScriptRoot
 $enc  = New-Object Text.UTF8Encoding $false
@@ -838,7 +838,7 @@ foreach ($u in $urls) {
 }
 $sm += '</urlset>' + "`n"
 [IO.File]::WriteAllText((Join-Path $ROOT 'sitemap.xml'), $sm, $enc)
-[IO.File]::WriteAllText((Join-Path $ROOT 'robots.txt'), "User-agent: *`nAllow: /`nDisallow: /_tools/`n`nSitemap: $SITE/sitemap.xml`n", $enc)
+[IO.File]::WriteAllText((Join-Path $ROOT 'robots.txt'), "User-agent: *`nAllow: /`nDisallow: /_tools/`nDisallow: /resit/`n`nSitemap: $SITE/sitemap.xml`n", $enc)
 "built  sitemap.xml ($($urls.Count) URLs) + robots.txt"
 
 # ---------------------------------------------------------------------

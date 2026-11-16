@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /_tools/
+Disallow: /resit/
 
-Sitemap: https://www.fmmobilefix.com.my/sitemap.xml
+Sitemap: https://fmmobilefix.com/sitemap.xml
