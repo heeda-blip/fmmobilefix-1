@@ -415,7 +415,7 @@ function JsonLd($P, $path, $title, $desc, $crumbs, $svcName, $faq, $extra) {
   $g.Add('{"@type":"WebPage","@id":"' + $url + '#webpage","url":"' + $url + '","name":"' + (JsonStr $title) + '","description":"' + (JsonStr $desc) + '","inLanguage":"ms-MY","isPartOf":{"@id":"' + $SITE + '/#website"}}')
   $items = @(); $pos = 1
   foreach ($c in $crumbs) { $items += '{"@type":"ListItem","position":' + $pos + ',"name":"' + (JsonStr $c[0]) + '","item":"' + $SITE + '/' + $c[1] + '"}'; $pos++ }
-  $g.Add('{"@type":"BreadcrumbList","itemListElement":[' + ($items -join ',') + ']}')
+  if ($items.Count -ge 2) { $g.Add('{"@type":"BreadcrumbList","itemListElement":[' + ($items -join ',') + ']}') }
   if ($svcName) {
     $g.Add('{"@type":"Service","name":"' + (JsonStr $svcName) + '","serviceType":"' + (JsonStr $svcName) + '","provider":{"@id":"' + $SITE + '/#business"},"areaServed":["Telok Panglima Garang","Rimbayu","Jalan Kebun","Shah Alam"],"url":"' + $url + '"}')
   }
@@ -849,7 +849,7 @@ $MAIN = @(
   @{ file='index.html'; P=''; path=''; sec='';
      title='Repair Phone &amp; Laptop Telok Panglima Garang | FM Mobile Fix';
      desc='Kedai repair phone dan laptop di Telok Panglima Garang, dekat Rimbayu, Jalan Kebun &amp; Shah Alam. Tukar skrin, bateri dan repair motherboard. Rating 5.0 di Google (68 review).';
-     crumbs=@(@('Utama','')); svc='' },
+     crumbs=@(,@('Utama','')); svc='' },
   @{ file='phone-repair\index.html'; P='../'; path='phone-repair/'; sec='phone';
      title='Kedai Repair Phone Telok Panglima Garang | FM Mobile Fix';
      desc='Kedai repair phone di Telok Panglima Garang: tukar skrin iPhone &amp; Android, tukar bateri, phone masuk air, charging port dan motherboard. Waranti 3 bulan untuk bateri &amp; LCD.';
