@@ -838,7 +838,7 @@ foreach ($u in $urls) {
 }
 $sm += '</urlset>' + "`n"
 [IO.File]::WriteAllText((Join-Path $ROOT 'sitemap.xml'), $sm, $enc)
-[IO.File]::WriteAllText((Join-Path $ROOT 'robots.txt'), "User-agent: *`nAllow: /`nDisallow: /_tools/`nDisallow: /resit/`n`nSitemap: $SITE/sitemap.xml`n", $enc)
+[IO.File]::WriteAllText((Join-Path $ROOT 'robots.txt'), "User-agent: *`nAllow: /`nDisallow: /_tools/`n`nSitemap: $SITE/sitemap.xml`n", $enc)
 "built  sitemap.xml ($($urls.Count) URLs) + robots.txt"
 
 # ---------------------------------------------------------------------
