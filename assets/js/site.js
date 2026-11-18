@@ -35,7 +35,7 @@ window.FM = {
         ga4:  'G-XXXXXXXXXX'
         ads:  'AW-XXXXXXXXXX'
         adsWhatsappLabel: 'xxxxxxxxxxxxxxxxx'  (from Google Ads > Conversions) */
-  analytics: { ga4: '', ads: '', adsWhatsappLabel: '' },
+  analytics: { ga4: 'G-0F11FGBMRC', ads: '', adsWhatsappLabel: '' },
   // Used by data-wa-service="..." buttons (e.g. each laptop service card)
   serviceMessage: function (service, lang) {
     return lang === 'ms'
@@ -139,7 +139,7 @@ window.FM = {
 
   /* ---------- Analytics / Google Ads conversions ---------- */
   var AN = FM.analytics || {};
-  if (AN.ga4 || AN.ads) {
+  if ((AN.ga4 || AN.ads) && !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) {
     var gs = document.createElement('script');
     gs.async = true;
     gs.src = 'https://www.googletagmanager.com/gtag/js?id=' + (AN.ga4 || AN.ads);
