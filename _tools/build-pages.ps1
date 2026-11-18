@@ -452,7 +452,9 @@ function Head($P, $path, $title, $desc, $ogImg, $ld) {
 <meta property="og:url" content="$url">
 <meta property="og:image" content="$SITE/assets/img/$ogImg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/png" href="${P}assets/img/favicon.png">
+<link rel="icon" href="${P}favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="192x192" href="${P}assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="${P}assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Barlow+Condensed:ital,wght@0,800;1,800&display=swap" rel="stylesheet">
